@@ -12,8 +12,8 @@ using Restaurant_Management_System.DbContexts;
 namespace RestaurantManagementSystem.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230201132547_initial")]
-    partial class initial
+    [Migration("20230201135458_initialmigration")]
+    partial class initialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,35 +174,6 @@ namespace RestaurantManagementSystem.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Restaurant_Management_System.Entities.OrderItem", b =>
-                {
-                    b.Property<int>("OrderItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"));
-
-                    b.Property<int>("MenuId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderItemId");
-
-                    b.HasIndex("MenuId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderItems");
-                });
-
             modelBuilder.Entity("Restaurant_Management_System.Entities.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -281,25 +252,6 @@ namespace RestaurantManagementSystem.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Restaurant_Management_System.Entities.OrderItem", b =>
-                {
-                    b.HasOne("Restaurant_Management_System.Entities.Menu", "Menu")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Restaurant_Management_System.Entities.Order", "Order")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Menu");
-
-                    b.Navigation("Order");
-                });
-
             modelBuilder.Entity("Restaurant_Management_System.Entities.Customer", b =>
                 {
                     b.Navigation("Orders");
@@ -308,16 +260,12 @@ namespace RestaurantManagementSystem.Migrations
             modelBuilder.Entity("Restaurant_Management_System.Entities.Menu", b =>
                 {
                     b.Navigation("Inventory");
-
-                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("Restaurant_Management_System.Entities.Order", b =>
                 {
                     b.Navigation("Bill")
                         .IsRequired();
-
-                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("Restaurant_Management_System.Entities.User", b =>
