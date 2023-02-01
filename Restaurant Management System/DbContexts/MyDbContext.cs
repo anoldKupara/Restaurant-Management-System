@@ -12,7 +12,6 @@ namespace Restaurant_Management_System.DbContexts
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }
-       public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Bill> Bills { get; set; }
         public DbSet<User> Users { get; set; }
@@ -25,16 +24,6 @@ namespace Restaurant_Management_System.DbContexts
                 .HasOne(o => o.Customer)
                 .WithMany(c => c.Orders)
                 .HasForeignKey(o => o.CustomerId);
-
-            modelBuilder.Entity<OrderItem>()
-                .HasOne(oi => oi.Order)
-                .WithMany(o => o.OrderItems)
-                .HasForeignKey(oi => oi.OrderId);
-
-            modelBuilder.Entity<OrderItem>()
-                .HasOne(oi => oi.Menu)
-                .WithMany(m => m.OrderItems)
-                .HasForeignKey(oi => oi.MenuId);
 
             modelBuilder.Entity<Inventory>()
                 .HasOne(i => i.Menu)

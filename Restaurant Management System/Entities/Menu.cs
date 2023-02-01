@@ -7,8 +7,7 @@
         public string Description { get; set; }
         public decimal Price { get; set; }
         public byte[] Image { get; set; }
-
-        public ICollection<OrderItem> OrderItems { get; set; }
+        
         public ICollection<Inventory> Inventory { get; set; }
     }
 }

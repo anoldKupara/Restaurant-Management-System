@@ -13,7 +13,6 @@
         public Customer Customer { get; set; }
         public Menu Menu { get; set; }
         public Bill Bill { get; set; }
-        public ICollection<OrderItem> OrderItems { get; set; }
         public User User { get; set; }
     }
 }
